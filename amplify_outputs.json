@@ -1,0 +1,2314 @@
+{
+  "auth": {
+    "user_pool_id": "eu-central-1_JbyCV9nuo",
+    "aws_region": "eu-central-1",
+    "user_pool_client_id": "6kuj1q8g6pfo4j7ej4eonq3dml",
+    "identity_pool_id": "eu-central-1:71058288-42c5-4e81-abdb-9559a19ea2a0",
+    "mfa_methods": [],
+    "standard_required_attributes": [
+      "email"
+    ],
+    "username_attributes": [
+      "email"
+    ],
+    "user_verification_types": [
+      "email"
+    ],
+    "groups": [
+      {
+        "SuperUser": {
+          "precedence": 0
+        }
+      },
+      {
+        "Admin": {
+          "precedence": 1
+        }
+      },
+      {
+        "Manager": {
+          "precedence": 2
+        }
+      },
+      {
+        "Employee": {
+          "precedence": 3
+        }
+      },
+      {
+        "Service": {
+          "precedence": 4
+        }
+      }
+    ],
+    "mfa_configuration": "NONE",
+    "password_policy": {
+      "min_length": 8,
+      "require_lowercase": true,
+      "require_numbers": true,
+      "require_symbols": true,
+      "require_uppercase": true
+    },
+    "unauthenticated_identities_enabled": true
+  },
+  "data": {
+    "url": "https://4zfdqzoqwvhmdjr7bldkz23mk4.appsync-api.eu-central-1.amazonaws.com/graphql",
+    "aws_region": "eu-central-1",
+    "default_authorization_type": "AMAZON_COGNITO_USER_POOLS",
+    "authorization_types": [
+      "AWS_IAM"
+    ],
+    "model_introspection": {
+      "version": 1,
+      "models": {
+        "Counter": {
+          "name": "Counter",
+          "fields": {
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "val": {
+              "name": "val",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Counters",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "name"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "name",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Total": {
+          "name": "Total",
+          "fields": {
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "val": {
+              "name": "val",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Totals",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "name"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "name",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Action": {
+          "name": "Action",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "actor": {
+              "name": "actor",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "modelName": {
+              "name": "modelName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "refId": {
+              "name": "refId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": {
+                "enum": "ActionType"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "typeIndex": {
+              "name": "typeIndex",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": {
+                "model": "UserProfile"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "userId"
+                ]
+              }
+            },
+            "before": {
+              "name": "before",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "after": {
+              "name": "after",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Actions",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "actionsByModelName",
+                "queryField": "listActionByModelName",
+                "fields": [
+                  "modelName"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "actionsByRefId",
+                "queryField": "listActionByRefId",
+                "fields": [
+                  "refId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "actionsByTypeIndex",
+                "queryField": "listActionByTypeIndex",
+                "fields": [
+                  "typeIndex"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "actionsByUserId",
+                "queryField": "listActionByUserId",
+                "fields": [
+                  "userId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Comment": {
+          "name": "Comment",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "lastActivityBy": {
+              "name": "lastActivityBy",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "text": {
+              "name": "text",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "refId": {
+              "name": "refId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "refType": {
+              "name": "refType",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "userId": {
+              "name": "userId",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdBy": {
+              "name": "createdBy",
+              "isArray": false,
+              "type": {
+                "model": "UserProfile"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "userId"
+                ]
+              }
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            }
+          },
+          "syncable": true,
+          "pluralName": "Comments",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "commentsByRefId",
+                "queryField": "listCommentByRefId",
+                "fields": [
+                  "refId"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "commentsByUserId",
+                "queryField": "listCommentByUserId",
+                "fields": [
+                  "userId"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "owner",
+                    "allow": "owner",
+                    "identityClaim": "cognito:username",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  },
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Admin"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  },
+                  {
+                    "allow": "private",
+                    "operations": [
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "UserProfile": {
+          "name": "UserProfile",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "profileOwner": {
+              "name": "profileOwner",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "cognitoName": {
+              "name": "cognitoName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "nickname": {
+              "name": "nickname",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "phoneNumber": {
+              "name": "phoneNumber",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "UserProfileStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "role": {
+              "name": "role",
+              "isArray": false,
+              "type": {
+                "enum": "UserProfileRole"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "photo": {
+              "name": "photo",
+              "isArray": false,
+              "type": "AWSURL",
+              "isRequired": false,
+              "attributes": []
+            },
+            "comments": {
+              "name": "comments",
+              "isArray": true,
+              "type": {
+                "model": "Comment"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "userId"
+                ]
+              }
+            },
+            "actions": {
+              "name": "actions",
+              "isArray": true,
+              "type": {
+                "model": "Action"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "userId"
+                ]
+              }
+            },
+            "settings": {
+              "name": "settings",
+              "isArray": false,
+              "type": "AWSJSON",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "UserProfiles",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "userProfilesByEmail",
+                "queryField": "listUserProfileByEmail",
+                "fields": [
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "userProfilesByCognitoName",
+                "queryField": "listUserProfileByCognitoName",
+                "fields": [
+                  "cognitoName"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "userProfilesByNickname",
+                "queryField": "listUserProfileByNickname",
+                "fields": [
+                  "nickname"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "profileOwner",
+                    "allow": "owner",
+                    "identityClaim": "cognito:username",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  },
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Admin"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Customer": {
+          "name": "Customer",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "AWSEmail",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "sales": {
+              "name": "sales",
+              "isArray": true,
+              "type": "String",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "Customers",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "customersByEmail",
+                "queryField": "listCustomerByEmail",
+                "fields": [
+                  "email"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "provider": "userPools",
+                    "ownerField": "profileOwner",
+                    "allow": "owner",
+                    "identityClaim": "cognito:username",
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  },
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Admin"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Account": {
+          "name": "Account",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            },
+            "number": {
+              "name": "number",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "lastActivityBy": {
+              "name": "lastActivityBy",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "firstName": {
+              "name": "firstName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastName": {
+              "name": "lastName",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "email": {
+              "name": "email",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "phoneNumber": {
+              "name": "phoneNumber",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "isMobile": {
+              "name": "isMobile",
+              "isArray": false,
+              "type": "Boolean",
+              "isRequired": false,
+              "attributes": []
+            },
+            "addressLine1": {
+              "name": "addressLine1",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "addressLine2": {
+              "name": "addressLine2",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "city": {
+              "name": "city",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "state": {
+              "name": "state",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "postcode": {
+              "name": "postcode",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "comunicationPreferences": {
+              "name": "comunicationPreferences",
+              "isArray": false,
+              "type": {
+                "enum": "AccountComunicationPreferences"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "AccountStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "kind": {
+              "name": "kind",
+              "isArray": false,
+              "type": {
+                "enum": "AccountKind"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "defaultSplit": {
+              "name": "defaultSplit",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "items": {
+              "name": "items",
+              "isArray": true,
+              "type": {
+                "model": "Item"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true,
+              "association": {
+                "connectionType": "HAS_MANY",
+                "associatedWith": [
+                  "accountNumber"
+                ]
+              }
+            },
+            "transactions": {
+              "name": "transactions",
+              "isArray": true,
+              "type": "String",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "balance": {
+              "name": "balance",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "noSales": {
+              "name": "noSales",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "noItems": {
+              "name": "noItems",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastActivityAt": {
+              "name": "lastActivityAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastItemAt": {
+              "name": "lastItemAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastSettlementAt": {
+              "name": "lastSettlementAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "tags": {
+              "name": "tags",
+              "isArray": true,
+              "type": "String",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            }
+          },
+          "syncable": true,
+          "pluralName": "Accounts",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "number"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "accountsById",
+                "queryField": "listAccountById",
+                "fields": [
+                  "id"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "accountsByStatus",
+                "queryField": "listAccountByStatus",
+                "fields": [
+                  "status"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "accountsByDeletedAtAndNumberAndCreatedAtAndBalance",
+                "queryField": "listAccountByDeletedAtAndNumberAndCreatedAtAndBalance",
+                "fields": [
+                  "deletedAt",
+                  "number",
+                  "createdAt",
+                  "balance"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "number",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Item": {
+          "name": "Item",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": false,
+              "attributes": []
+            },
+            "sku": {
+              "name": "sku",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "lastActivityBy": {
+              "name": "lastActivityBy",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "title": {
+              "name": "title",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "account": {
+              "name": "account",
+              "isArray": false,
+              "type": {
+                "model": "Account"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "accountNumber"
+                ]
+              }
+            },
+            "accountNumber": {
+              "name": "accountNumber",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "category": {
+              "name": "category",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "brand": {
+              "name": "brand",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "color": {
+              "name": "color",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "size": {
+              "name": "size",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "details": {
+              "name": "details",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "images": {
+              "name": "images",
+              "isArray": true,
+              "type": "AWSURL",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "condition": {
+              "name": "condition",
+              "isArray": false,
+              "type": {
+                "enum": "ItemCondition"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "split": {
+              "name": "split",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "price": {
+              "name": "price",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "ItemStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "group": {
+              "name": "group",
+              "isArray": false,
+              "type": {
+                "model": "ItemGroup"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "HAS_ONE",
+                "associatedWith": [
+                  "itemSku"
+                ],
+                "targetNames": []
+              }
+            },
+            "sales": {
+              "name": "sales",
+              "isArray": true,
+              "type": "String",
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "printedAt": {
+              "name": "printedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastSoldAt": {
+              "name": "lastSoldAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastViewedAt": {
+              "name": "lastViewedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            }
+          },
+          "syncable": true,
+          "pluralName": "Items",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "sku"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemsById",
+                "queryField": "listItemById",
+                "fields": [
+                  "id"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemsByCategory",
+                "queryField": "listItemByCategory",
+                "fields": [
+                  "category"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemsByBrand",
+                "queryField": "listItemByBrand",
+                "fields": [
+                  "brand"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemsByColor",
+                "queryField": "listItemByColor",
+                "fields": [
+                  "color"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemsBySize",
+                "queryField": "listItemBySize",
+                "fields": [
+                  "size"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemsByStatus",
+                "queryField": "listItemByStatus",
+                "fields": [
+                  "status"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemsByCreatedAt",
+                "queryField": "listItemByCreatedAt",
+                "fields": [
+                  "createdAt"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "sku",
+            "sortKeyFieldNames": []
+          }
+        },
+        "ItemGroup": {
+          "name": "ItemGroup",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "quantity": {
+              "name": "quantity",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "statuses": {
+              "name": "statuses",
+              "isArray": true,
+              "type": {
+                "enum": "ItemStatus"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": true
+            },
+            "itemSku": {
+              "name": "itemSku",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "item": {
+              "name": "item",
+              "isArray": false,
+              "type": {
+                "model": "Item"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "association": {
+                "connectionType": "BELONGS_TO",
+                "targetNames": [
+                  "itemSku"
+                ]
+              }
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": [],
+              "isReadOnly": true
+            }
+          },
+          "syncable": true,
+          "pluralName": "ItemGroups",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        },
+        "ItemCategory": {
+          "name": "ItemCategory",
+          "fields": {
+            "lastActivityBy": {
+              "name": "lastActivityBy",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "categoryKind": {
+              "name": "categoryKind",
+              "isArray": false,
+              "type": {
+                "enum": "ItemCategoryKind"
+              },
+              "isRequired": true,
+              "attributes": []
+            },
+            "kind": {
+              "name": "kind",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "name": {
+              "name": "name",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "matchNames": {
+              "name": "matchNames",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "deletedAt": {
+              "name": "deletedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            }
+          },
+          "syncable": true,
+          "pluralName": "ItemCategories",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "kind",
+                  "name"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemCategoriesByKind",
+                "queryField": "listItemCategoryByKind",
+                "fields": [
+                  "kind"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "itemCategoriesByMatchNames",
+                "queryField": "listItemCategoryByMatchNames",
+                "fields": [
+                  "matchNames"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "kind",
+            "sortKeyFieldNames": [
+              "name"
+            ]
+          }
+        },
+        "Sale": {
+          "name": "Sale",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "number": {
+              "name": "number",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "lastActivityBy": {
+              "name": "lastActivityBy",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "customerEmail": {
+              "name": "customerEmail",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "accountNumber": {
+              "name": "accountNumber",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "SaleStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "discount": {
+              "name": "discount",
+              "isArray": false,
+              "type": {
+                "nonModel": "Discount"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "gross": {
+              "name": "gross",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "subTotal": {
+              "name": "subTotal",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "total": {
+              "name": "total",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "tax": {
+              "name": "tax",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "change": {
+              "name": "change",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "refund": {
+              "name": "refund",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "accountTotal": {
+              "name": "accountTotal",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "storeTotal": {
+              "name": "storeTotal",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "transaction": {
+              "name": "transaction",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "items": {
+              "name": "items",
+              "isArray": true,
+              "type": {
+                "nonModel": "SaleItem"
+              },
+              "isRequired": false,
+              "attributes": [],
+              "isArrayNullable": false
+            },
+            "refundedSale": {
+              "name": "refundedSale",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            }
+          },
+          "syncable": true,
+          "pluralName": "Sales",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "fields": [
+                  "number"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "salesByTransaction",
+                "queryField": "listSaleByTransaction",
+                "fields": [
+                  "transaction"
+                ]
+              }
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "salesByRefundedSale",
+                "queryField": "listSaleByRefundedSale",
+                "fields": [
+                  "refundedSale"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": true,
+            "primaryKeyFieldName": "number",
+            "sortKeyFieldNames": []
+          }
+        },
+        "Transaction": {
+          "name": "Transaction",
+          "fields": {
+            "id": {
+              "name": "id",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "createdAt": {
+              "name": "createdAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "updatedAt": {
+              "name": "updatedAt",
+              "isArray": false,
+              "type": "AWSDateTime",
+              "isRequired": false,
+              "attributes": []
+            },
+            "lastActivityBy": {
+              "name": "lastActivityBy",
+              "isArray": false,
+              "type": "ID",
+              "isRequired": true,
+              "attributes": []
+            },
+            "paymentType": {
+              "name": "paymentType",
+              "isArray": false,
+              "type": {
+                "enum": "TransactionPaymentType"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "type": {
+              "name": "type",
+              "isArray": false,
+              "type": {
+                "enum": "TransactionType"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "amount": {
+              "name": "amount",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "tax": {
+              "name": "tax",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": true,
+              "attributes": []
+            },
+            "status": {
+              "name": "status",
+              "isArray": false,
+              "type": {
+                "enum": "TransactionStatus"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "linked": {
+              "name": "linked",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            }
+          },
+          "syncable": true,
+          "pluralName": "Transactions",
+          "attributes": [
+            {
+              "type": "model",
+              "properties": {}
+            },
+            {
+              "type": "key",
+              "properties": {
+                "name": "transactionsByType",
+                "queryField": "listTransactionByType",
+                "fields": [
+                  "type"
+                ]
+              }
+            },
+            {
+              "type": "auth",
+              "properties": {
+                "rules": [
+                  {
+                    "groupClaim": "cognito:groups",
+                    "provider": "userPools",
+                    "allow": "groups",
+                    "groups": [
+                      "Employee"
+                    ],
+                    "operations": [
+                      "create",
+                      "update",
+                      "delete",
+                      "read"
+                    ]
+                  }
+                ]
+              }
+            }
+          ],
+          "primaryKeyInfo": {
+            "isCustomPrimaryKey": false,
+            "primaryKeyFieldName": "id",
+            "sortKeyFieldNames": []
+          }
+        }
+      },
+      "enums": {
+        "ItemStatus": {
+          "name": "ItemStatus",
+          "values": [
+            "Created",
+            "Tagged",
+            "Active",
+            "Sold",
+            "ToDonate",
+            "Donated",
+            "Parked",
+            "Returned",
+            "Expired",
+            "Lost",
+            "Stolen",
+            "Multi",
+            "Unknown"
+          ]
+        },
+        "ItemCategoryKind": {
+          "name": "ItemCategoryKind",
+          "values": [
+            "Category",
+            "Brand",
+            "Color",
+            "Size"
+          ]
+        },
+        "ActionType": {
+          "name": "ActionType",
+          "values": [
+            "Create",
+            "Read",
+            "Update",
+            "Delete",
+            "Search",
+            "Import",
+            "Export",
+            "Increment",
+            "Decrement",
+            "Auth"
+          ]
+        },
+        "UserProfileStatus": {
+          "name": "UserProfileStatus",
+          "values": [
+            "Active",
+            "Inactive",
+            "Suspended",
+            "Pending"
+          ]
+        },
+        "UserProfileRole": {
+          "name": "UserProfileRole",
+          "values": [
+            "Admin",
+            "Manager",
+            "Employee",
+            "Service",
+            "Guest"
+          ]
+        },
+        "AccountComunicationPreferences": {
+          "name": "AccountComunicationPreferences",
+          "values": [
+            "TextMessage",
+            "Email",
+            "Whatsapp",
+            "None"
+          ]
+        },
+        "AccountStatus": {
+          "name": "AccountStatus",
+          "values": [
+            "Active",
+            "Inactive",
+            "Suspended"
+          ]
+        },
+        "AccountKind": {
+          "name": "AccountKind",
+          "values": [
+            "Standard",
+            "VIP",
+            "Vender",
+            "Employee",
+            "Customer",
+            "Owner"
+          ]
+        },
+        "ItemCondition": {
+          "name": "ItemCondition",
+          "values": [
+            "AsNew",
+            "Good",
+            "Marked",
+            "Damaged",
+            "Unknown",
+            "NotSpecified"
+          ]
+        },
+        "SaleStatus": {
+          "name": "SaleStatus",
+          "values": [
+            "Pending",
+            "Finalized",
+            "Parked",
+            "Voided"
+          ]
+        },
+        "TransactionPaymentType": {
+          "name": "TransactionPaymentType",
+          "values": [
+            "Cash",
+            "Card",
+            "GiftCard",
+            "StoreCredit",
+            "Other"
+          ]
+        },
+        "TransactionType": {
+          "name": "TransactionType",
+          "values": [
+            "Sale",
+            "Refund",
+            "Payout",
+            "Reversal",
+            "TransferIn",
+            "TransferOut"
+          ]
+        },
+        "TransactionStatus": {
+          "name": "TransactionStatus",
+          "values": [
+            "Pending",
+            "Completed",
+            "Failed"
+          ]
+        },
+        "SaleItemCondition": {
+          "name": "SaleItemCondition",
+          "values": [
+            "AsNew",
+            "Good",
+            "Marked",
+            "Damaged",
+            "Unknown",
+            "NotSpecified"
+          ]
+        }
+      },
+      "nonModels": {
+        "SaleItem": {
+          "name": "SaleItem",
+          "fields": {
+            "sku": {
+              "name": "sku",
+              "isArray": false,
+              "type": "String",
+              "isRequired": true,
+              "attributes": []
+            },
+            "title": {
+              "name": "title",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "category": {
+              "name": "category",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "brand": {
+              "name": "brand",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "color": {
+              "name": "color",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "size": {
+              "name": "size",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "description": {
+              "name": "description",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "details": {
+              "name": "details",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "condition": {
+              "name": "condition",
+              "isArray": false,
+              "type": {
+                "enum": "SaleItemCondition"
+              },
+              "isRequired": false,
+              "attributes": []
+            },
+            "split": {
+              "name": "split",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            },
+            "price": {
+              "name": "price",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        },
+        "Discount": {
+          "name": "Discount",
+          "fields": {
+            "label": {
+              "name": "label",
+              "isArray": false,
+              "type": "String",
+              "isRequired": false,
+              "attributes": []
+            },
+            "value": {
+              "name": "value",
+              "isArray": false,
+              "type": "Int",
+              "isRequired": false,
+              "attributes": []
+            }
+          }
+        }
+      }
+    }
+  },
+  "version": "1.3"
+}

@@ -1,12 +1,11 @@
 "use client";
-// import Chart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
+import { Dropdown } from "../ui/dropdown/Dropdown";
+import { DropdownItem } from "../ui/dropdown/DropdownItem";
+import { MoreDotIcon } from "@/icons";
 
 import dynamic from "next/dynamic";
-import { Dropdown } from "../ui/dropdown/Dropdown";
-import { MoreDotIcon } from "@/icons";
 import { useState } from "react";
-import { DropdownItem } from "../ui/dropdown/DropdownItem";
 // Dynamically import the ReactApexChart component
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -61,7 +60,6 @@ export default function MonthlyTarget() {
     },
     labels: ["Progress"],
   };
-
   const [isOpen, setIsOpen] = useState(false);
 
   function toggleDropdown() {
@@ -71,7 +69,6 @@ export default function MonthlyTarget() {
   function closeDropdown() {
     setIsOpen(false);
   }
-
   return (
     <div className="rounded-2xl border border-gray-200 bg-gray-100 dark:border-gray-800 dark:bg-white/[0.03]">
       <div className="px-5 pt-5 bg-white shadow-default rounded-2xl pb-11 dark:bg-gray-900 sm:px-6 sm:pt-6">
@@ -84,7 +81,7 @@ export default function MonthlyTarget() {
               Target you’ve set for each month
             </p>
           </div>
-          <div className="relative inline-block">
+          <div className="relative h-fit">
             <button onClick={toggleDropdown} className="dropdown-toggle">
               <MoreDotIcon className="text-gray-400 hover:text-gray-700 dark:hover:text-gray-300" />
             </button>
@@ -94,14 +91,12 @@ export default function MonthlyTarget() {
               className="w-40 p-2"
             >
               <DropdownItem
-                tag="a"
                 onItemClick={closeDropdown}
                 className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
               >
                 View More
               </DropdownItem>
               <DropdownItem
-                tag="a"
                 onItemClick={closeDropdown}
                 className="flex w-full font-normal text-left text-gray-500 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
               >
@@ -111,7 +106,7 @@ export default function MonthlyTarget() {
           </div>
         </div>
         <div className="relative ">
-          <div className="max-h-[330px]">
+          <div className="max-h-[330px]" id="chartDarkStyle">
             <ReactApexChart
               options={options}
               series={series}

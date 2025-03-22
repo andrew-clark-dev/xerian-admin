@@ -9,7 +9,6 @@ import Form from "../Form";
 import { CalenderIcon } from "../../../icons";
 import Button from "../../ui/button/Button";
 import Flatpickr from "react-flatpickr";
-import "flatpickr/dist/themes/light.css";
 
 export default function ExampleFormTwo() {
   const [selectedOption, setSelectedOption] = useState<string>("Free");
@@ -62,7 +61,7 @@ export default function ExampleFormTwo() {
           </div>
           <div>
             <Label htmlFor="lastName">Last Name</Label>
-            <Input type="text" placeholder="Enter last name" id="firstName" />
+            <Input type="text" placeholder="Enter last name" id="lastName" />
           </div>
           <div className="col-span-2">
             <Label htmlFor="email">Gender</Label>
@@ -75,7 +74,7 @@ export default function ExampleFormTwo() {
             />
           </div>
           <div className="col-span-2">
-            <Label htmlFor="lastName">Date of Birth</Label>
+            <Label htmlFor="dateOfBirth">Date of Birth</Label>
             <div className="relative w-full flatpickr-wrapper">
               <Flatpickr
                 value={dateOfBirth} // Set the value to the state
@@ -84,7 +83,7 @@ export default function ExampleFormTwo() {
                   dateFormat: "Y-m-d", // Set the date format
                 }}
                 placeholder="Select an option"
-                className="w-full py-2 pl-3 pr-10 text-sm border border-gray-300 rounded-md h-11 focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                className="h-11 w-full rounded-lg border appearance-none px-4 py-2.5 text-sm shadow-theme-xs placeholder:text-gray-400 focus:outline-hidden focus:ring-3  dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30  bg-transparent text-gray-800 border-gray-300 focus:border-brand-300 focus:ring-brand-500/20 dark:border-gray-700  dark:focus:border-brand-800"
               />
               <span className="absolute text-gray-500 -translate-y-1/2 pointer-events-none right-3 top-1/2 dark:text-gray-400">
                 <CalenderIcon />

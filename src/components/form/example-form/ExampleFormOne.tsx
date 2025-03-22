@@ -38,15 +38,11 @@ export default function ExampleFormOne() {
           </div>
           <div className="col-span-2 sm:col-span-1">
             <Label htmlFor="lastName">Last Name</Label>
-            <Input type="text" placeholder="Enter last name" id="firstName" />
+            <Input type="text" placeholder="Enter last name" id="lastName" />
           </div>
           <div className="col-span-2">
             <Label htmlFor="email">Email</Label>
-            <Input
-              type="text"
-              placeholder="Enter email address"
-              id="firstName"
-            />
+            <Input type="text" placeholder="Enter email address" id="email" />
           </div>
           <div className="col-span-2">
             <Label htmlFor="subject">Subject</Label>

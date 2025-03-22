@@ -23,7 +23,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
         disabled ? "cursor-not-allowed opacity-60" : ""
       }`}
     >
-      <div className="relative w-5 h-5">
+      <div className={`relative w-5 h-5`}>
         <input
           id={id}
           type="checkbox"

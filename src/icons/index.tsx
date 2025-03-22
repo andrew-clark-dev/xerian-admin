@@ -49,13 +49,10 @@ import DocsIcon from "./docs.svg";
 import MailIcon from "./mail-line.svg";
 import HorizontaLDots from "./horizontal-dots.svg";
 import ChatIcon from "./chat.svg";
-import MoreDotIcon from "./more-dot.svg";
-import BellIcon from "./bell.svg";
+import MoreDotIcon from "./MoreDotIcon.svg";
 
 export {
   DownloadIcon,
-  BellIcon,
-  MoreDotIcon,
   FileIcon,
   GridIcon,
   AudioIcon,
@@ -106,4 +103,5 @@ export {
   HorizontaLDots,
   ChevronUpIcon,
   ChatIcon,
+  MoreDotIcon,
 };

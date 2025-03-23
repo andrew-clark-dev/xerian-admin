@@ -2,14 +2,62 @@
 import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
 import Label from "@/components/form/Label";
-import Button from "@/components/ui/button/Button";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import Link from "next/link";
 import React, { useState } from "react";
 
+import { fetchAuthSession, signIn } from "aws-amplify/auth"
+import { useRouter } from "next/navigation";
+// import SubmitButton from "../ui/button/SubmitButton";
+import Button from "../ui/button/Button";
+import Form from "../form/Form";
+
 export default function SignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState("");
+
+  const router = useRouter();
+
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // setLoading(true);
+    // setError("");
+
+    console.log("Form submitted:" + email + " " + password);
+
+    try {
+
+      const { isSignedIn } = await signIn({ username: email, password: password });
+      console.log("Form isSignedIn:" + isSignedIn);
+
+      if (isSignedIn) {
+        // const session = await fetchAuthSession();
+        // const token = session.tokens!.idToken!
+        // Cookies.set("auth_token", token.toString(), { expires: 7, path: "/" }); // Set token in cookies
+        const session = await fetchAuthSession();
+        console.log("Session:" + session.credentials);
+        router.push("/profile"); // Redirect to profile
+        return;
+      }
+      // setError("Sign In failed. Please try again.");
+
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        console.log("Form error:" + err.message);
+        // setError(err.message || "Sign In failed. Please try again.");
+      } else {
+        // setError("Sign In failed. Please try again.");
+      }
+    } finally {
+      // setLoading(false);
+    }
+  };
+
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
       <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
@@ -84,13 +132,14 @@ export default function SignInForm() {
                 </span>
               </div>
             </div>
-            <form>
+            <Form onSubmit={handleLogin}>
               <div className="space-y-6">
                 <div>
                   <Label>
                     Email <span className="text-error-500">*</span>{" "}
                   </Label>
-                  <Input placeholder="info@gmail.com" />
+                  <Input placeholder="info@gmail.com" onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
                 <div>
                   <Label>
@@ -100,6 +149,7 @@ export default function SignInForm() {
                     <Input
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <span
                       onClick={() => setShowPassword(!showPassword)}
@@ -127,13 +177,13 @@ export default function SignInForm() {
                     Forgot password?
                   </Link>
                 </div>
-                <div>
+                <div className="col-span-full">
                   <Button className="w-full" size="sm">
-                    Sign in
+                    Sign In
                   </Button>
                 </div>
               </div>
-            </form>
+            </Form>
 
             <div className="mt-5">
               <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">

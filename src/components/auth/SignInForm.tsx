@@ -6,7 +6,7 @@ import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import Link from "next/link";
 import React, { useState } from "react";
 
-import { fetchAuthSession, signIn } from "aws-amplify/auth"
+import { signIn } from "aws-amplify/auth"
 import { useRouter } from "next/navigation";
 // import SubmitButton from "../ui/button/SubmitButton";
 import Button from "../ui/button/Button";
@@ -36,12 +36,7 @@ export default function SignInForm() {
       console.log("Form isSignedIn:" + isSignedIn);
 
       if (isSignedIn) {
-        // const session = await fetchAuthSession();
-        // const token = session.tokens!.idToken!
-        // Cookies.set("auth_token", token.toString(), { expires: 7, path: "/" }); // Set token in cookies
-        const session = await fetchAuthSession();
-        console.log("Session:" + session.credentials);
-        router.push("/profile"); // Redirect to profile
+        router.push("/"); // Redirect to home
         return;
       }
       // setError("Sign In failed. Please try again.");

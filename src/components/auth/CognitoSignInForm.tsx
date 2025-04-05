@@ -5,8 +5,7 @@ import Button from "@/components/ui/button/Button";
 import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
 import Link from "next/link";
 import React, { useState } from "react";
-// import { useForm } from 'react-hook-form';
-
+import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
 
 import { signIn } from "aws-amplify/auth"
@@ -14,21 +13,16 @@ import { signIn } from "aws-amplify/auth"
 
 export default function CognitoSignInForm() {
   const [showPassword, setShowPassword] = useState(false);
-
-  // const { register, handleSubmit } = useForm();
-
-  // const onSubmit = (data: any) => {
-  //   console.log(data);
-  // };
+  const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // setLoading(true);
-    // setError("");
+    setLoading(true);
 
     console.log("Form submitted:" + email + " " + password);
 
@@ -41,22 +35,23 @@ export default function CognitoSignInForm() {
         router.push("/"); // Redirect to home
         return;
       }
-      // setError("Sign In failed. Please try again.");
 
     } catch (err: unknown) {
       if (err instanceof Error) {
         console.log("Form error:" + err.message);
-        // setError(err.message || "Sign In failed. Please try again.");
+        toast.error(err.message || 'Sign In failed. Please try again.');
+
       } else {
-        // setError("Sign In failed. Please try again.");
+        toast.error('Sign In failed. Please try again.');
       }
     } finally {
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
   return (
     <div className="flex flex-col flex-1 lg:w-1/2 w-full">
+
       <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
         <Link
           href="/"
@@ -116,7 +111,7 @@ export default function CognitoSignInForm() {
                   </Link>
                 </div>
                 <div>
-                  <Button className="w-full" size="sm">
+                  <Button className="w-full" size="sm" disabled={loading}>
                     Sign in
                   </Button>
                 </div>

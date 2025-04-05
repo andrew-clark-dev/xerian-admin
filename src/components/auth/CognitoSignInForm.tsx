@@ -8,21 +8,20 @@ import React, { useState } from "react";
 import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
 
-import { signIn, confirmResetPassword, resetPassword } from "aws-amplify/auth"
+import { signIn, confirmSignIn } from "aws-amplify/auth"
 
 
 export default function CognitoSignInForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   // const [resetPassword, setResetPassword] = useState(false);
-  const [confirmWithCode, setConfirmWithCode] = useState(false);
+  const [confirmWithPassword, setConfirmWithPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmationCode, setConfirmationCode] = useState("");
   const router = useRouter();
 
 
@@ -33,12 +32,15 @@ export default function CognitoSignInForm() {
     console.log("Form submitted:" + email + " " + password);
 
     try {
-      if (confirmWithCode) {
-        await confirmResetPassword({
-          username: email,
-          confirmationCode: confirmationCode,
-          newPassword: newPassword,
-        });
+      if (confirmWithPassword) {
+        const { nextStep } = await confirmSignIn({ challengeResponse: newPassword });
+        switch (nextStep.signInStep) {
+          case 'DONE':
+            toast.success(`Sign in successful`);
+            break;
+          default:
+            toast.error(`Could not sign in please contact your administrator (step: ${nextStep.signInStep})`);
+        }
 
         toast.success('Password udated');
 
@@ -50,17 +52,7 @@ export default function CognitoSignInForm() {
 
         switch (nextStep.signInStep) {
           case 'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED':
-            const { nextStep: resetStep } = await resetPassword({ username: email });
-            switch (resetStep.resetPasswordStep) {
-              case 'CONFIRM_RESET_PASSWORD_WITH_CODE':
-                const codeDeliveryDetails = resetStep.codeDeliveryDetails;
-                toast.success(`Confirmation code was sent to ${codeDeliveryDetails.destination} via ${codeDeliveryDetails.deliveryMedium}`);
-                setConfirmWithCode(true);
-                break;
-              default:
-                console.log(`Next step : ${nextStep}`);
-                toast.error(`Could not reset password please contact your administrator`);
-            }
+            setConfirmWithPassword(true);
             break;
           default:
             if (isSignedIn) {
@@ -138,7 +130,7 @@ export default function CognitoSignInForm() {
                     </span>
                   </div>
                 </div>
-                {confirmWithCode ? (
+                {confirmWithPassword ? (
                   <div>
                     <div>
                       <Label>
@@ -161,12 +153,6 @@ export default function CognitoSignInForm() {
                           )}
                         </span>
                       </div>
-                    </div>
-                    <div>
-                      <Label>
-                        Confirmation Code <span className="text-error-500">*</span>{" "}
-                      </Label>
-                      <Input onChange={(e) => setConfirmationCode(e.target.value)} />
                     </div>
                   </div>
                 ) : null}

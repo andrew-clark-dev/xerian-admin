@@ -1,4 +1,4 @@
-import ResetPasswordForm from "@/components/auth/ResetPasswordForm";
+import CognitoResetPasswordForm from "@/components/auth/CognitoResetPasswordForm";
 import { Metadata } from "next";
 
 import React from "react";
@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function ResetPasswordPage() {
-  return <ResetPasswordForm />;
+  return <CognitoResetPasswordForm />;
 }

@@ -8,32 +8,68 @@ import React, { useState } from "react";
 import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
 
-import { signIn } from "aws-amplify/auth"
+import { signIn, confirmResetPassword, resetPassword } from "aws-amplify/auth"
 
 
 export default function CognitoSignInForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  // const [resetPassword, setResetPassword] = useState(false);
+  const [confirmWithCode, setConfirmWithCode] = useState(false);
+
   const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmationCode, setConfirmationCode] = useState("");
   const router = useRouter();
 
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     console.log("Form submitted:" + email + " " + password);
 
     try {
+      if (confirmWithCode) {
+        await confirmResetPassword({
+          username: email,
+          confirmationCode: confirmationCode,
+          newPassword: newPassword,
+        });
 
-      const { isSignedIn } = await signIn({ username: email, password: password });
-      console.log("Form isSignedIn:" + isSignedIn);
+        toast.success('Password udated');
 
-      if (isSignedIn) {
         router.push("/"); // Redirect to home
-        return;
+
+      } else {
+        const { nextStep, isSignedIn } = await signIn({ username: email, password: password });
+        console.log(`Next step : ${nextStep.signInStep}`);
+
+        switch (nextStep.signInStep) {
+          case 'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED':
+            const { nextStep: resetStep } = await resetPassword({ username: email });
+            switch (resetStep.resetPasswordStep) {
+              case 'CONFIRM_RESET_PASSWORD_WITH_CODE':
+                const codeDeliveryDetails = resetStep.codeDeliveryDetails;
+                toast.success(`Confirmation code was sent to ${codeDeliveryDetails.destination} via ${codeDeliveryDetails.deliveryMedium}`);
+                setConfirmWithCode(true);
+                break;
+              default:
+                console.log(`Next step : ${nextStep}`);
+                toast.error(`Could not reset password please contact your administrator`);
+            }
+            break;
+          default:
+            if (isSignedIn) {
+              toast.success(`Sign in successful`);
+              router.push("/"); // Redirect to home
+            } else {
+              toast.error(`Could not sign in please contact your administrator (step: ${nextStep.signInStep})`);
+            }
+        }
       }
 
     } catch (err: unknown) {
@@ -72,7 +108,7 @@ export default function CognitoSignInForm() {
             </p>
           </div>
           <div>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSubmit}>
               <div className="space-y-6">
                 <div>
                   <Label>
@@ -102,7 +138,39 @@ export default function CognitoSignInForm() {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center justify-between">
+                {confirmWithCode ? (
+                  <div>
+                    <div>
+                      <Label>
+                        New Password <span className="text-error-500">*</span>{" "}
+                      </Label>
+                      <div className="relative">
+                        <Input
+                          type={showNewPassword ? "text" : "password"}
+                          placeholder="Enter your new password"
+                          onChange={(e) => setNewPassword(e.target.value)}
+                        />
+                        <span
+                          onClick={() => setShowNewPassword(!showNewPassword)}
+                          className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                        >
+                          {showPassword ? (
+                            <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
+                          ) : (
+                            <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
+                          )}
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <Label>
+                        Confirmation Code <span className="text-error-500">*</span>{" "}
+                      </Label>
+                      <Input onChange={(e) => setConfirmationCode(e.target.value)} />
+                    </div>
+                  </div>
+                ) : null}
+                < div className="flex items-center justify-between">
                   <Link
                     href="/reset-password"
                     className="text-sm text-brand-500 hover:text-brand-600 dark:text-brand-400"
@@ -120,7 +188,7 @@ export default function CognitoSignInForm() {
 
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }

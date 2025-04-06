@@ -2,3 +2,4 @@ node_modules
 amplify_outputs.json
 .next
 .DS_Store
+.npm

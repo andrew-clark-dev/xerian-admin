@@ -8,7 +8,7 @@ frontend:
     preBuild:
       commands:
         - git submodule update --init --recursive
-        - cd backend && npm ci --cache .npm --prefer-offline
+        - cd backend && npm ci --cache .npm --prefer-offline && cd ..
         - npm ci --cache .npm --prefer-offline
         - npx ampx generate outputs --branch $AWS_BRANCH --app-id d37cin6h86nzlq
     build:

@@ -29,6 +29,12 @@
       "@data-schema": [
         "./backend/amplify/data/resource"
       ],
+      "$amplify/*": [
+        "./backend/amplify/generated/*"
+      ],
+      "@server/*": [
+        "./backend/amplify/server/*"
+      ]
     }
   },
   "include": [

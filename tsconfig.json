@@ -27,7 +27,7 @@
         "./src/*"
       ],
       "@data-schema": [
-        "../xerian/amplify/data/resource"
+        "./backend/amplify/data/resource"
       ],
     }
   },

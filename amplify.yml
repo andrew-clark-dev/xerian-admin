@@ -2,11 +2,15 @@ version: 1
 backend:
   phases:
     build:
-      commands:
-        - npm install --cache .npm --prefer-offline
-        - npx ampx generate outputs --branch $AWS_BRANCH --app-id d37cin6h86nzlq
+      commands: []
 frontend:
   phases:
+    preBuild:
+      commands:
+        - git submodule update --init --recursive
+        - cd backend && npm ici --cache .npm --prefer-offline
+        - npm ci --cache .npm --prefer-offline
+        - npx ampx generate outputs --branch $AWS_BRANCH --app-id d37cin6h86nzlq
     build:
       commands:
         - npm run build
@@ -18,3 +22,5 @@ frontend:
     paths:
       - .next/cache/**/*
       - .npm/**/*
+      - node_modules/**/*
+      - backend/node_modules/**/*
